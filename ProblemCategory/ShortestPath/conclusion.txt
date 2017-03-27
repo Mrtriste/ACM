@@ -1,0 +1,13 @@
+http://www.cnblogs.com/PJQOOO/p/3861437.html
+http://blog.csdn.net/xiazdong/article/details/8193680
+
+Dijkstra：适用于权值为非负的图的单源最短路径，用斐波那契堆的复杂度O(E+VlgV)
+BellmanFord：适用于权值有负值的图的单源最短路径，并且能够检测负圈，复杂度O(VE)
+SPFA：适用于权值有负值，且没有负圈的图的单源最短路径，论文中的复杂度O(kE)，k为每个节点进入Queue的次数，且k一般<=2，但此处的复杂度证明是有问题的，其实SPFA的最坏情况应该是O(VE).
+Floyd：每对节点之间的最短路径。
+
+先给出结论：
+(1)当权值为非负时，用Dijkstra。
+(2)当权值有负值，且没有负圈，则用SPFA，SPFA能检测负圈，但是不能输出负圈。
+(3)当权值有负值，而且可能存在负圈，则用BellmanFord，能够检测并输出负圈。
+(4)SPFA检测负环：当存在一个点入队大于等于V次，则有负环，后面有证明。
