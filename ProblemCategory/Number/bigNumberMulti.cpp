@@ -19,9 +19,10 @@ int main(){
 		for (int j = 0; j < blen; ++j)
 		res[i + j] += tempa[i] * tempb[j];
 		
+			
+
 	int c=0,k;
 	for ( i = 0; i < len; ++i){
-		cout << int(res[i]) <<" " <<c << ", ";
 		k = (res[i]+c) % 10;
 		c = (res[i] + c) / 10;
 		res[i] = k;
@@ -32,7 +33,7 @@ int main(){
 			break;
 
 	for (j = i; j >= 0; --j)
-		cout << char(res[j] + '0');//+'0'
+		cout << res[j];
 
 	system("pause");
 	return 0;
