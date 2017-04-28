@@ -17,8 +17,6 @@ void pack(int f[], int V, int v, int n, int w)
 			if (f[i] < f[i - v] + w) f[i] = f[i - v] + w;
 		return;
 	}
-	memset(va, 0, sizeof(va));
-	memset(va, 0, sizeof(vb));
 	//int va[MAX_V], vb[MAX_V];   //va/vb: 主/辅助队列  
 	//第一重循环的作用：上述推导过程的b
 	for (int j = 0; j < v; ++j) {     //多重背包，注意v为该物品的体积，因此复杂度为o(v*m[i])=o(V),m[i]为min(n[i],V/v[i])
@@ -43,7 +41,7 @@ void pack(int f[], int V, int v, int n, int w)
 	}
 }
 
-int main(){
+int main12761(){
 	int cash, n, num[11], d[11];
 	int f[100001];
 	while (scanf("%d%d", &cash, &n) != EOF){
