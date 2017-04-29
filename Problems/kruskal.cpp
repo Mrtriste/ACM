@@ -1,7 +1,3 @@
-//克鲁斯卡尔算法——最小生成树
-//核心思想是将图中的每条边排序，每次选一个最小的边，看加入这条边后是否会和已经选的那些点构成环，如果不会的话就将这条边的两个点加入集合
-//至于如何判断环，用并查集
-
 #include <iostream>
 #include <algorithm>
 using namespace std;
@@ -45,7 +41,7 @@ void Union(int a,int b){
 		parentK[x] = y;
 }
 
-int main(){
+int mainkruscal(){
 	Edge edge[MAX_SIZE];
 	int vtx[MAX_SIZE];
 	int edge_num = 11;
