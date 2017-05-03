@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main(){
+int mainbignumberadd(){
 	char a[20] = "12345";
 	char b[20] = "456789";
 
@@ -28,4 +28,5 @@ int main(){
 	cout << max;
 		
 	system("pause");
+	return 0;
 }
