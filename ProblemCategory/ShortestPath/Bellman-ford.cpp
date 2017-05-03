@@ -1,6 +1,9 @@
 //http://www.cnblogs.com/tanky_woo/archive/2011/01/17/1937728.html
 //http://blog.csdn.net/niushuai666/article/details/6791765
 //http://www.cnblogs.com/Jason-Damon/archive/2012/04/21/2460850.html
+
+//it is worse than SPFA!!!!!!!!!!!
+
 /*
 1.首先指出，图的任意一条最短路径既不能包含负权回路，也不会包含正权回路，因此它最多包含|v|-1条边。
 2.其次，从源点s可达的所有顶点如果 存在最短路径，则这些最短路径构成一个以s为根的最短路径树。
@@ -10,6 +13,78 @@
 3.因为最短路径最多只包含|v|-1 条边，所以，只需要循环|v|-1 次。
 */
 
+//negative loop means: all the edges in the loop's sum < 0
+
+//////////////////////////////////////////////my realization
+#include <iostream>
+#include <vector>
+using namespace std;
+
+struct Node4{
+    int v;
+    int weight;
+    Node4(int v, int w) :v(v), weight(w){}
+};
+
+int main(){
+    const int N = 100;
+    int a1[] = { 0, 0, 0, 1, 2, 2, 3, 4, 5, 5, 5, 6 };
+    int a2[] = { 1, 2, 3, 4, 4, 5, 6, 6, 4, 6, 3, 1 };
+    //int a3[] = { 24, 8, 15, 6, 7, 3, 4, 9, 2, 3, 5, -3 };
+    int a3[] = { 24, 8, 15, 6, 7, 3, 4, 9, 2, 3, 5, -30 };
+    int vNum = 7, eNum = 12;
+
+    vector<Node4> Graph[N];
+    for (int i = 0; i < eNum; ++i)
+        Graph[a1[i]].push_back(Node4(a2[i], a3[i]));
+
+    int dis[N];
+    for (int i = 0; i < N; ++i)
+        dis[i] = 100000000;
+
+    int start = 0;
+    dis[start] = 0;
+
+    for (int i = 0; i < vNum; ++i){
+        for (int j = 0; j < vNum; ++j){//
+            for (int k = 0; k < Graph[j].size(); ++k){
+                int v = Graph[j][k].v;
+                int w = Graph[j][k].weight;
+                if (dis[v]>dis[j] + w)
+                    dis[v] = dis[j] + w;
+            }
+        }
+    }
+
+    //detect if there's a negative loop
+    bool flag = 1;
+    for (int j = 0; j < vNum; ++j){
+        for (int k = 0; k < Graph[j].size(); ++k){
+            int v = Graph[j][k].v;
+            int w = Graph[j][k].weight;
+            if (dis[v] > dis[j] + w){
+                flag = 0;
+                break;
+            }
+        }
+    }
+    if (flag)
+        for (int i = 0; i < vNum; ++i)
+            cout << dis[i] << endl;
+    else
+        cout << "there's negative loop" << endl;
+        
+            
+                
+
+    system("pause");
+    return 0;
+}
+
+
+
+
+///////////////////////////////////////////////
 #include<iostream>  
 #include<cstdio>  
 using namespace std;  
