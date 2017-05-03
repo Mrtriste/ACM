@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main(){
+int mainLCM(){
 	int m = 18 * 13, n = 18 * 97;
 	int mm = m, nn = n;
 	int temp;
