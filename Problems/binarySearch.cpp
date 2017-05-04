@@ -4,7 +4,7 @@ using namespace std;
 int mainbinarysearch(){
 	int a[] = { -1, 2, 2, 4, 4, 4, 5, 6, 7 };
 	int left = 0, right = 8;
-	int x = 8;
+	int x = -3;
 	int mid;
 	while (left < right){
 		mid = left + ((right - left) >> 1);
