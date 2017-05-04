@@ -5,7 +5,7 @@
 int main(){
 	int a[] = { 1, 2, 2, 4, 4, 4, 5, 6, 7 };
 	int left = 0, right = 8;
-	int x = 3;
+	int x = 3;//如果x大于最大的数，返回最后一个下标，这就不符合要求，单独考虑，比如在LIS中
 	int mid;
 	while (left < right){
 		mid = left + ((right - left) >> 1);
