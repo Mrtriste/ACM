@@ -9,6 +9,53 @@
 // 这个状态转移方程的意思就是，MaxLen(k)的值，就是在ak左边，“终点”数值小于ak，且长度最大的那个上升子序列的长度再加1。因为ak左边任何“终点”小于ak的子序列，加上ak后就能形成一个更长的上升子序列。
 // 实际实现的时候，可以不必编写递归函数，因为从 MaxLen(1)就能推算出MaxLen(2)，有了MaxLen(1)和MaxLen(2)就能推算出MaxLen(3)……
 
+//////////////////////////////////////my realization
+//dp[]存放的是a[k]
+//http://blog.csdn.net/shuangde800/article/details/7474903
+#include <iostream>
+using namespace std;
+
+int binarySearch(int dp[], int left,int right,int x){
+	while (left < right){
+		int mid = left + ((right - left) >> 1);
+		if (dp[mid] >= x)right = mid;
+		else
+			left = mid + 1;
+	}
+	return left;
+}
+
+int main(){
+	const int N = 100;
+	int testArr[] = { 2, 1, 5, 3, 6, 4, 8, 9, 7 };
+	int n = 9;
+	int a[N];
+	int dp[N];
+	//a[]从下标1开始
+	for (int i = 0; i < n; ++i)
+		a[i + 1] = testArr[i];//a[1..n]={}
+
+	////////////////////////
+	//下降子序列i->[n..1]
+	int maxLen = 1;
+	dp[1] = a[1];
+	for (int i = 2; i <= n; ++i){//对a[]中的每个元素，在dp[]z中找到适合a[i]待的位置
+		if (a[i]>dp[maxLen])
+			dp[++maxLen] = a[i];
+		else{
+			//找到第一个比a[i]大的树的位置，并更新它
+			//那么dp[j]表示的是，长度为j的LIS中，它可能的最小的末尾元素是a[i]
+			int j = binarySearch(dp, 1, maxLen,a[i]);
+			dp[j] = a[i];
+		}
+	}
+	cout << maxLen << endl;
+	system("pause");
+	return 0;
+
+}
+
+///////////////////////////////////////
 #include <iostream>
 #define SIZE 1001
 
