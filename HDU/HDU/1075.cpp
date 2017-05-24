@@ -14,13 +14,15 @@ int main(){
 		getline(cin, s);
 		if (s[0] == 'E'){
 			++endCnt;
-			continue;
+			if (endCnt == 2)
+				break;
+			else
+				continue;
 		}
 			
 		if (s[0] == 'S')
 			continue;
-		if (endCnt == 2)
-			break;
+		
 		if (endCnt == 1){
 			int b=0,e=0, pos = 0;
 			while (b < s.length()){
