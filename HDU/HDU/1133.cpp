@@ -44,7 +44,7 @@ struct BigInteger{
 			down = (down * 10000 + digit[i]) % x;
 		}
 		int l =size - 1;
-		while (ret.digit[l] == 0 && l > 1)
+		while (ret.digit[l] == 0 && l >0)
 			l--;
 		ret.size = l + 1;
 		return ret;
