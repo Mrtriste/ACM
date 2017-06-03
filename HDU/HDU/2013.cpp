@@ -1,0 +1,12 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+	long long a[35];
+	a[1] = 1;
+	for (int i = 2; i < 30; ++i)
+		a[i] = (a[i - 1] + 1) * 2;
+	int n;
+	while (cin >> n)
+		cout << a[n] << endl;
+}
