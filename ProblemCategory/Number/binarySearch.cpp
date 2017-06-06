@@ -17,3 +17,7 @@ int main(){
 	system("pause");
 	return 0;
 }
+
+//怎么记忆？
+//a[mid]>x为false的话，可以取a[mid]=x,此时left=mid+1,也就是把与x相等的抛弃了，也就是upper_bound
+//也就是说left的在mid上+1才是驱动事件
