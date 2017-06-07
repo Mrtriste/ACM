@@ -1,22 +1,18 @@
-#include <stdio.h>
+#include <iostream>
 using namespace std;
-const int MAX = 25;
-int main(void)
+int main()
 {
-	int cas;
-	int f[MAX];
-	f[0] = 1;
-	f[1] = 3;
-	for (int i = 2; i < MAX; i++)
-		f[i] = 2 * f[i - 1] + f[i - 2];
-	scanf("%d", &cas);
-	while (cas--)
-	{
-		int n;
-		scanf("%d", &n);
-		printf("%d\n", f[n]);
+	int up[25], left[25];
+	up[1] = 1, left[1] = 1;
+	for (int i = 2; i <= 20; ++i){
+		up[i] = up[i - 1] + 2 * left[i - 1];
+		left[i] = up[i - 1] + left[i - 1];
 	}
-	return 0;
+	int C, n; cin >> C;
+	while (C--){
+		cin >> n;
+		cout << (up[n] + 2 * left[n]) << endl;
+	}
 }
 
 //DFS³¬Ê±
