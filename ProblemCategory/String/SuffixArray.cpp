@@ -72,6 +72,8 @@ void da(int *r, int *sa, int n, int m)
     return;
 }
 
+//（1）height 数组：定义height[i]=suffix(SA[i-1])和suffix(SA[i])的最长公共前缀，也就是排名相邻的两个后缀的最长公共前缀的长度 。
+//(2）h[i]=height[rank[i]]，也就是suffix(i)和排序后在它前一名的后缀的最长公共前缀的长度。
 /*能够线性计算height[]的值的关键在于h[](height[rank[]])的性质，即h[i]>=h[i-1]-1，下面具体分析一下这个不等式的由来。
 //论文里面证明的部分一开始看得我云里雾里，后来画了一下终于搞明白了，我们先把要证什么放在这：
   对于第i个后缀，设j=sa[rank[i] - 1]，也就是说j是i的按排名来的上一个字符串，按定义来i和j的最长公共前缀就是height[rank[i]]，
