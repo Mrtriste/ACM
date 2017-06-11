@@ -39,3 +39,52 @@ int main()
 	}
 	return 0;
 }
+
+/////////////////////////print path
+#include<stdio.h>  
+#include<string.h>  
+#include<algorithm>  
+using namespace std;  
+#define N 10  
+int dp[N][N];  
+int path[N];  
+int main()  
+{  
+    char a[N];  
+    char b[N];  
+    freopen("lcsInput.txt","r",stdin);  
+    freopen("lcsOutput.txt","w",stdout);  
+    scanf("%s%s",a,b);  
+    int la=strlen(a);  
+    int lb=strlen(b);  
+    memset(dp,0,sizeof(dp));  
+    for(int i=1;i<=la;i++)  
+    {  
+        for(int j=1;j<=lb;j++)  
+        {  
+            if(a[i-1]==b[j-1])  
+            dp[i][j]=dp[i-1][j-1]+1;  
+            else  
+            dp[i][j]=max(dp[i-1][j],dp[i][j-1]);  
+        }  
+    }  
+    int i=la,j=lb,k=0;  
+    while(dp[i][j])  
+    {  
+        if(dp[i][j]==dp[i-1][j])  
+        i--;  
+        else if(dp[i][j]==dp[i][j-1])  
+        j--;  
+        else  
+        {  
+            path[k++]=i-1;  
+            i--;j--;  
+        }  
+    }  
+    printf("%s\n%s\n",a,b);  
+    printf("最长公共子序列长度=%d\n",dp[la][lb]);  
+    for(int i=k-1;i>=0;i--)  
+    printf("%c",a[path[i]]);  
+    printf("\n");  
+    return 0;  
+}  
