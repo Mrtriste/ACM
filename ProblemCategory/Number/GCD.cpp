@@ -16,4 +16,10 @@ int main(){
 	return 0;
 }
 
+int GCD(int a,int b)  
+{  
+    if(b==0) return a;  
+    return GCD(b,a%b);  
+}  
+
 //n个数的最大公约数,将前一次两个数的最大公约数带入下一次的计算
