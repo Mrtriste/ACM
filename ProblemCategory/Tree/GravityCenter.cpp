@@ -24,6 +24,7 @@ int minNode;
 int minBalance;
 
 //对每个node最终比较的只有两部分，1.他所有子树中节点最大的个数 2.他的父节点的另一个子树的个数
+//son != parent 避开了父节点的连通块的计算，用n-d[node]即为父节点的连通块的节点
 //for循环是为了找到node所有子树节点的最大个数
 //先dfs的节点是父节点
 void dfs(int node, int parent) // node and its parent
@@ -74,3 +75,66 @@ int main()
 
     return 0;
 }
+
+
+///////////////////////////////////////////////////////////POJ3107
+//realized with adjacent table, vector will TLE
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+const int maxN = 50010;
+
+struct Edge{
+    int v, next;
+};
+
+int head[maxN];//head[i]表示节点i连接的第一条边的下标是head[i],接下来edge.next是下一条边的下标，edge.v是i连的点
+Edge edge[2*maxN];
+int n,k=0,mmin=10000000;
+int num[maxN], dp[maxN];
+bool vis[maxN];
+
+void addEdge(int u, int v){
+    edge[k].v = v;
+    edge[k].next = head[u];
+    head[u] = k++;
+}
+
+void DFS(int r){
+    vis[r] = 1;
+    int maxSon = 0;
+    for (int i = head[r]; i != -1; i = edge[i].next){
+        int v = edge[i].v;
+        if (vis[v])continue;
+        DFS(v);
+        maxSon = max(maxSon, num[v]);
+        num[r] += num[v];
+    }
+    maxSon = max(maxSon, n - num[r]);
+    dp[r] = maxSon;
+    mmin = min(mmin, maxSon);
+}
+
+int main(){
+    cin >> n;
+    memset(vis, 0, sizeof(vis));
+    memset(head, -1, sizeof(head));
+    int u, v;
+    for (int i = 1; i <= n; ++i)num[i] = 1;
+    for (int i = 0; i < n - 1; ++i){
+        scanf("%d%d", &u, &v);
+        addEdge(u, v);
+        addEdge(v, u);
+    }
+    DFS(1);
+    int cnt = 0;
+    for (int i = 1; i <= n; ++i)
+        if (dp[i] == mmin)num[cnt++] = i;
+    cout << num[0];
+    for (int i = 1; i < cnt; ++i)
+        cout << " " << num[i];
+    cout << endl;
+    system("pause");
+}
+
