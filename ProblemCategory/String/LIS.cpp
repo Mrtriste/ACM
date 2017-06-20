@@ -9,6 +9,50 @@
 // 这个状态转移方程的意思就是，MaxLen(k)的值，就是在ak左边，“终点”数值小于ak，且长度最大的那个上升子序列的长度再加1。因为ak左边任何“终点”小于ak的子序列，加上ak后就能形成一个更长的上升子序列。
 // 实际实现的时候，可以不必编写递归函数，因为从 MaxLen(1)就能推算出MaxLen(2)，有了MaxLen(1)和MaxLen(2)就能推算出MaxLen(3)……
 
+
+/////////////////////////////////////o(n^2)
+//cal the num of the longest increasing subsequence
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int dp[5010];
+int cnt[5010];
+int a[5010];
+int n;
+
+int main(){
+	while (cin >> n){
+		for (int i = 0; i < n; ++i){
+			scanf("%d", &a[i]);
+			dp[i] = 1; cnt[i] = 1;
+		}
+		int maxl = 0,sum=0;
+		for (int i = 0; i < n; ++i){
+			for (int j = i - 1; j >= 0; --j){
+				if (a[i] < a[j]){
+					if (dp[i] < dp[j] + 1){
+						dp[i] = dp[j] + 1;
+						cnt[i] = cnt[j];
+					}
+					else if (dp[i] == dp[j] + 1)
+						cnt[i] += cnt[j];
+					
+				}
+				if (a[i] == a[j]){//dp[i]>=dp[j]
+					if (dp[i] == 1)cnt[i] = 0;
+					break;
+				}
+			}
+			maxl = max(maxl, dp[i]);
+		}
+		for (int i = 0; i < n; ++i)
+			if (dp[i] == maxl)sum += cnt[i];
+		cout <<maxl<<" "<< sum << endl;
+	}
+}
+
+
 //////////////////////////////////////my realization
 //dp[]存放的是a[k]
 //http://blog.csdn.net/shuangde800/article/details/7474903
