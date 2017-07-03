@@ -1,4 +1,7 @@
+//选择排序
+
 //交换的次数最多为n-1
+//每一次从后面的无序数组中找一个最小的放在有序数组的最后
 void SelectSort(int a[], int n)  
 {  
     int i, j, min;  
