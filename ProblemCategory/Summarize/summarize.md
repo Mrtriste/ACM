@@ -1,7 +1,7 @@
 ### 以下针对c++
 
 * [比较函数](#比较函数)
-* [sort](sort)
+* [sort](#sort)
 
 ## 比较函数
 
@@ -107,14 +107,60 @@ sort(appli, appli + N, cmp);
 
 
 
+## 输入流
+
+- getline:读取一行，但不包括换行，即最后不吸收换行
+
+​       getine(cin,str,'\n')，第二个参数string，第三个自定义的结束符，默认换行符
+
+- scanf("%c")
+
+  ```c++
+  scanf("%c",&X)//这里遇换行刷新前面的字符进入%c
+  while
+  {
+    scanf("%c",&X);//会吸收上一次的换行
+  }
+  ```
+
+  可以改成
+
+  ```c++
+  scanf("%c",&X)
+  while
+  {
+    scanf("%c",&X);
+    if(X=='\n') scanf("%c",&X);
+  }
+  ```
+
+  ​
+
+- getchar()
+
+  读取任意字符
+
 
 
 ## 头文件
 
 memset : <cstring>
 
-scanf,printf : <stdio.h>
+scanf,printf ,getchar : <stdio.h>
 
 sort : <algorithm>
 
 greater : <functional>
+
+
+
+## Note:
+
+```c++
+for (int i = 0; i < N; ++i){
+  for (int j = 0; j < m; ++j){//j很容易错
+
+  }
+}
+```
+
