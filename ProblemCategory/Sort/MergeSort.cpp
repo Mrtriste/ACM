@@ -10,6 +10,15 @@ void mergearray(int a[], int first, int mid, int last, int temp[])
     while (i <= m && j <= n)  //一个数组比完了就停止
         temp[k++]=(a[i]<=a[j]?a[i++]:a[j++]);  
 
+/*   逆序数
+     while(i <= mid && j <= last){  
+        if(a[i] <= a[j]) tmp[k++] = a[i++];  
+        else{  
+            tmp[k++] = a[j++];  
+            cnt += mid-i+1;  
+        }  
+    }  */
+
     //将剩余的元素放在temp后面，以下两个循环只会执行一个
     while (i <= m)  
         temp[k++] = a[i++];  
