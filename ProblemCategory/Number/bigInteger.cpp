@@ -24,7 +24,7 @@ struct BigInteger{
             t += (s[i] - '0') * c;
             k++;
             c *= 10;
-            if (j == 4 || i == b){
+            if (K == 4 || i == b){
                 digit[size++] = t;
                 k = 0;  t = 0;  c = 1;
             }
