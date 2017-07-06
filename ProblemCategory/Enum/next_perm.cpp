@@ -1,5 +1,7 @@
 //poj1256 下一个排列
 //'A'<'a'<'B'<'b'<...<'Z'<'z'
+//http://leonard1853.iteye.com/blog/1450085
+//http://www.cnblogs.com/devymex/archive/2010/08/17/1801122.html
 
 #include <iostream>
 #include <algorithm>
