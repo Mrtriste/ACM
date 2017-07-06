@@ -11,6 +11,7 @@ void PreOrder(){
 	stack<Node*> s;
 	Node*p = root;
 	while (p||!s.empty()){
+		//每次p达到一个叶节点
 		while (p){
 			cout << (char)p->data;
 			s.push(p);
