@@ -19,12 +19,12 @@ void BinaryTreeFromOrderings(char* inorder, char* preorder, int length)
 	int rootIndex = 0；
 	for (； rootIndex < length； rootIndex++)
 		if (inorder[rootIndex] == *preorder)
-			break；
+			break;
 	
 	BinaryTreeFromOrderings(inorder, preorder + 1, rootIndex)；//Left
 	BinaryTreeFromOrderings(inorder + rootIndex + 1, preorder + rootIndex + 1, length - (rootIndex + 1))；//Right
-	cout<<c；
-	return；
+	cout<<c;
+	return;
 }
 
 int main(int argc, char* argv[])
