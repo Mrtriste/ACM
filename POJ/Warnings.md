@@ -310,3 +310,403 @@ int DFS(int x,int y){
 
 
 
+## 1125 Stockbroker Grapevine
+
+floyd，不知道为什么归到动态规划里。
+
+
+
+## 1157 LITTLE SHOP OF FLOWERS
+
+动态规划，想的差不多了，但是没注意到花必须全部要插到花瓶中。
+
+
+
+## 1163 The Triangle
+
+数塔，动态规划。
+
+
+
+## 1189 钉子和小球
+
+类似于数塔。
+
+
+
+## 1456 Supermarket
+
+每件物品有利润和deadline，要在deadline前卖出去才有利润，每件商品卖出去就要把那一整天给占了。
+
+和HDU上的一题一样，做作业的，在deadline前交作业。
+
+将利润从大到小排序，每次挑一个利润最大的，找<=deadline的最大日期，将它放进去，标记这天已用。
+
+可以用并查集优化每次找deadline前的那天，par[i]表示第i天之前最近的没用过的一天，初始化为自己，用过之后，则把par[i-1]设为i-1，表示它之前的一天，压缩的时候能压到最近的没用过的那天。
+
+
+
+## 1609 Tiling Up Blocks
+
+最长上升子序列。
+
+将l从小到大排好，再在m序列里找最大非递减子序列。
+
+非递减子序列和上升子序列的不同就是，上升的话，在m>dp[len-1]时，dp[len++]=m，二分查找时用的是lower_bound，但非递减是m>=dp[len-1]时，dp[len++]=m，查找用的是upper_bound
+
+再复习一下如何打印最长上升子序列。dp[i]表示的是长度。
+
+
+
+## 1699 Best Sequences
+
+最短公共父序列。
+
+DFS
+
+
+
+## 1887 Testing the CATCHER
+
+最长非递增子序列。
+
+```c++
+int binary_search(int left, int right,int x){//the first number < x
+	int mid;
+	while (left < right){
+		mid = left + ((right - left) >> 1);
+		if (x > dp[mid])right = mid;
+		else left = mid + 1;
+	}
+	return left;
+}
+
+int main(){
+  if (a <= dp[len - 1]){
+    dp[len++] = a; 
+    continue;
+  }
+  int pos = binary_search(1,len-1,a);
+  dp[pos] = a;
+}
+```
+
+
+
+## 1936 All in All
+
+是否是子串，超时了两次
+
+strlen(s)在循环里一直被调用，浪费了时间。
+
+
+
+## 1952 BUY LOW, BUY LOWER
+
+最长严格下降子序列，并统计不重复的最长子序列的个数
+
+```c++
+for (int i = 0; i < n; ++i){
+  	for (int j = i - 1; j >= 0; --j){
+    	if (a[i] < a[j]){
+      	if (dp[i] < dp[j] + 1){
+        	dp[i] = dp[j] + 1;
+        	cnt[i] = cnt[j];
+      	}
+      	else if (dp[i] == dp[j] + 1)
+        	cnt[i] += cnt[j];
+    }
+    if (a[i] == a[j]){//dp[i]>=dp[j]
+      	if (dp[i] == 1)cnt[i] = 0;
+     	break;
+    }
+  }
+  maxl = max(maxl, dp[i]);
+}
+```
+
+
+
+## 1953 World Cup Noise
+
+应该叫递推，不算动态规划。
+
+
+
+## 1958 Strange Towers of Hanoi
+
+四根柱子移汉诺塔
+
+递推。
+
+
+
+## 1962 Corporative Network
+
+带权并查集，不同的是，在合并x和y时，并不需要找到根节点，还是要看题意。
+
+
+
+## 1975 Median Weight Bead
+
+找不可能成为中位数的数的个数
+
+Floyd传递闭包。
+
+
+
+## 3660 Cow Contest
+
+确定能确定排名的牛的个数
+
+Floyd传递闭包，注意比较的时候
+
+```c++
+i!=j&&!(edge[i][j]||edge[j][i])
+```
+
+
+
+## 1989 The Cow Lineup
+
+最短非子序列
+
+找出囊括1到k的排列的个数 num，如题中所给示例  1 5 3 2 5 1 3 4 4 2 5 1 2 3      
+
+   (1 5 3 2 5 1 3 4)(4 2 5 1 2 3)[ ] 
+
+共有2个囊括1到k的排列,所以最短非子序列为3
+
+
+
+## 3250 Bad Hair Day
+
+每头牛只能看到他右边比他矮的牛，求每头牛可以看到的牛的数量的和。
+
+转换成每头牛被看多少次的和，每头牛可以被他左边比他高的牛看到。
+
+
+
+## 2029 Get Many Persimmon Trees
+
+将s列的数加起来，得到一个长度为h的数组，求这个数组的连续t个数的最大和。
+
+本来还以为要用到单调队列，结果不需要。
+
+单调队列求最大和是在求不超过k个长度的子串的最大和用到。
+
+
+
+## 2033 Alphacode
+
+数字串转字母串的可能的种数
+
+在判断前后两个字母能否组成一个字母的时候傻逼了，写成s[i-1]<='2'&&s[i]<='6'
+
+
+
+## 2063 Investment
+
+银行利息，完全背包。
+
+
+
+## 2081 Recaman's Sequence
+
+模拟
+
+
+
+## 2082 Terrible Sets
+
+最大面积矩形
+
+对每个矩形的高度，找到左右两边能到达的最远距离，可以用单调栈从o(n^2)优化到o(n).
+
+
+
+## 2184 Cow Exhibition
+
+一开始根本没想到思路，看了题解，用01背包
+
+我觉得题解推的有点快，直接说出了方案，我觉得应该这样思考，首先都为负的肯定都不用考虑，剩下的至少有一个非负的，对于这些数据，难点在哪里？当加入一个牛时，TS和TF都变，很难办，而且很难判断这次加入的是否会影响到最后取最大值，因此我们只能求出所有的可能性。
+
+我们注意到TS的范围在-100000~100000，我们对每个能取到的TS值，求出此时能达到的最大TF。
+
+
+
+## 2192 Zipper 
+
+动态规划，dp[i]\[j]表示a的前i个字母和b的前j个字母能否组成c的前i+j个字母。
+
+```c++
+dp[0][0]=1;
+if (j>0&&dp[i][j - 1] && b[j - 1] == c[i+j - 1])dp[i][j] = 1;
+if (i>0&&dp[i - 1][j] && a[i - 1] == c[i+j - 1])dp[i][j] = 1;
+```
+
+
+
+## 2231 Moo Volume
+
+n个数任意两个数差的和，找规律，o(n).
+
+
+
+## 2346 Lucky tickets
+
+暴力把0-99999每种的个数列出来，做乘法即可。
+
+
+
+## 2353 Ministry
+
+动态规划
+
+一个房间可以由左边、右边或下面的房间到达，如果要求到达这个房间的最短路径，首先将它们都赋值为下面的房间到达这里的路径，然后每个房间由左边的房间到达一次，再由右边到达一次。
+
+而且int pre[i]\[j]能表示的意义太多了（j-1左边，j+1右边，j下边），没必要用个point来表示左右下三个房间的意义。
+
+而且可以从终点向前遍历，不一定要从前向后遍历。
+
+
+
+## 2355 Railway tickets
+
+动态规划，可以二分优化
+
+坑的地方是可以从后面的站到达前面的。
+
+
+
+## 2356 Find a multiple
+
+抽屉原理，n个数中一定可以取到若干个数的和是n的倍数。
+
+设sum[i]=a1+a2+...+ai，如果sum[i]%n==0则满足，否则n个sum[i]的取值在1~(n-1)中，有重复。
+
+
+
+## 2385 Apple Catching
+
+很经典的一道动态规划，只是没做出来，对这种前i个最多（或正好）j个不是很会。
+
+有两种解法，其实差不多
+
+dp\[i][j]表示前i分钟最多走了j次得到的最多的苹果
+
+dp\[i][j]表示前i分钟只走了j次得到的最多的苹果
+
+
+
+## 2392 Space Elevator
+
+多种背包，我好像看到了多重背包的除了转换成0-1背包和二进制优化的[第三种解法](http://blog.csdn.net/libin56842/article/details/9492351)，
+
+```c++
+for (i = 0; i<t; i++){
+	memset(sum, 0, sizeof(sum));
+	for (j = a[i].h; j <= a[i].hmax; j++)  {
+		if (!dp[j] && dp[j - a[i].h] && sum[j - a[i].h]<a[i].n) {
+			dp[j] = 1;
+			sum[j] = sum[j - a[i].h] + 1;//统计该石块放置的个数  
+			if (ans<j)  ans = j;
+		}
+	}
+}
+```
+
+
+
+## 1019 Number Sequence 
+
+分到动态规划里，但是就是找规律，感觉更像模拟。
+
+
+
+## 1080 Human Gene Functions 
+
+动态规划，类似于最长公共子序列
+
+注意可以scanf("%s",a+1)
+
+```c++
+int mmax = max(dp[i - 1][j] + getValue(a[i], '-'), dp[i][j - 1] + getValue(b[j], '-'));
+mmax = max(mmax, dp[i - 1][j - 1] + getValue(a[i],b[j]));
+dp[i][j] = mmax;
+```
+
+
+
+## 1141 Brackets Sequence
+
+添加最少的(,),[,]，使字符串符合规则。
+
+动态规划，我觉得还是比较难的，特别是在输出那里。
+
+特别是在while(scanf("%s",a))那里，不知道为什么这样就WA，把循环去了只输入一次就AC了，谜一样的bug。
+
+
+
+## 1014 Dividing
+
+多重背包，sum[]优化。
+
+
+
+## 3260 The Fewest Coins
+
+多重背包和完全背包。
+
+这里的多重背包不能用sum数组优化，因为一般用sum数组优化的判断条件为
+
+```c++
+if(!dp[j]&&dp[j-a[i]]&&sum[j-a[i]]<cnt[i]){
+  	//do sonething
+}
+```
+
+这里的```!dp[j]``` 表示的就是如果以前这个值达不到那么我就用现在的a[i]弥补，那么每次a[i]都用在刀刃上，如果dp[j]表示的不是j这个值能不能达到，那么每次就无法得到最优解，只能用二进制优化。
+
+（比如这题本来想要判断j-a[i]能不能达到，能达到的话再比较最少次数，但是不可行，所以能用sum优化的题目求的是j能不能达到。）
+
+
+
+## 1170 Shopping Offers 
+
+动态规划，应该可以用状态压缩，但是不怎么会，就用的五重循环，一遍AC。
+
+
+
+## 1239 Increasing Sequences 
+
+我觉得好烦的一道DP，两遍DP，自己想根本想不出来，知道方法了实现也要半天。
+
+
+
+## 2342 Anniversary party
+
+树形DP，和HDU1520一样
+
+
+
+## 3107 Godfather
+
+树形DP，邻接表表示树，vector超时。
+
+
+
+## 1655 Balancing Act
+
+树的重心，树形DP
+
+
+
+## 1837 Balance
+
+0-1背包，不是裸题
+
+0-1背包应该是一种暴力枚举的思想吧
+
+
+
