@@ -18,7 +18,7 @@ int LCStr(char* a, char*b){
 			if (a[i] == b[j])
 				arr[i + 1][j + 1] = arr[i][j] + 1;
 			else
-				arr[i + 1][j + 1] = max(arr[i + 1][j], arr[i][j + 1]);	
+				arr[i + 1][j + 1] = 0; // max(arr[i + 1][j], arr[i][j + 1]);
 		}
 	return arr[strlen(a)][strlen(b)];
 }
