@@ -1,2 +1,1 @@
-# ACM
-This is a respository to learn algorithms.
+Brush the problem of HDU & POJ.
